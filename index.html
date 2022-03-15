@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/font_jnhs6z9b8v/iconfont.css">
+  <link rel="stylesheet" href="./css/font_aiug0mq1ogg/iconfont.css">
   <link rel="shortcut icon" href="favicon.ico">
   <title>画图</title>
 </head>
@@ -17,9 +18,16 @@
   <canvas id="canvas"></canvas>
 
   <nav class="tools-bar">
+    <div class="go-history">
+      <span class="iconfont icon-direction-left goBack"></span>
+      <span class="iconfont icon-direction-right goForward"></span>
+    </div>
+
     <div class="button button-clear" data-clear></div>
-    <div class="button button-cover pick-cover" data-cover><span class="iconfont icon-iconfont_xiangpica pick-cover"></span></div>
-    <div class="button button-cover pick-download" data-cover><span class="iconfont icon-xiazai pick-download"></span></div>
+    <div class="button button-cover pick-cover" data-cover><span
+        class="iconfont icon-iconfont_xiangpica pick-cover"></span></div>
+    <div class="button button-cover pick-download" data-cover><span class="iconfont icon-xiazai pick-download"></span>
+    </div>
   </nav>
 
   <nav class="thickness-bar bar" data-type="thickness">
@@ -39,8 +47,6 @@
     <div class="color" data-color="#e67e22"></div>
     <div class="color" data-color="#E73C61"></div>
   </nav>
-  <button class="goBack">回退</button>
-  <button class="goForward">前进</button>
   <script src="./js/utils.js"></script>
   <script src="./js/main.js"></script>
 </body>

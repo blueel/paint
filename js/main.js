@@ -106,19 +106,36 @@ const bindEventPenColor = () => {
   });
 };
 
-const bindEventRightSide = () => {
+const bindEventClearAll = () => {
   const btn = e(".tools-bar");
   bindEvent(btn, "click", (event) => {
     let target = event.target;
     let clearClassName = "button-clear";
-    let overClassName = 'pick-cover'
-    let downloadClassName = 'pick-download'
     if (target.classList.contains(clearClassName)) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }else if(target.classList.contains(overClassName)) {
+      historyImageData = []
+    }
+  });
+};
+
+const bindEventCover = () => {
+  const btn = e(".tools-bar");
+  bindEvent(btn, "click", (event) => {
+    let target = event.target;
+    let overClassName = 'pick-cover'
+    if(target.classList.contains(overClassName)) {
       penColor = 'white'
       updateCanvasOption();
-    }else if(target.classList.contains(downloadClassName)){
+    }
+  });
+}
+
+const bindEventDownload = () => {
+  const btn = e(".tools-bar");
+  bindEvent(btn, "click", (event) => {
+    let target = event.target;
+    let downloadClassName = 'pick-download'
+    if(target.classList.contains(downloadClassName)){
       const image = canvas.toDataURL("image/png"); 
       const link = document.createElement("a");
       console.log('image',image);
@@ -127,7 +144,7 @@ const bindEventRightSide = () => {
       link.click();
     }
   });
-};
+}
 
 const bindEventBack = () => {
   let goBack = e('.goBack')
@@ -160,7 +177,9 @@ const bindEvents = () => {
   bindEventLeave();
   bindEventPenColor();
   bindEventPenThickness();
-  bindEventRightSide();
+  bindEventClearAll();
+  bindEventCover();
+  bindEventDownload();
   bindEventBack();
   bindEventForward();
 };
