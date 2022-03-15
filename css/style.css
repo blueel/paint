@@ -35,6 +35,7 @@ body {
   filter: blur(100px);
   opacity: .5;
   transform: scale(1.2, 1.2);
+  z-index: -1;
 }
 
 #canvas {

@@ -17,6 +17,12 @@ const init = () => {
   window.penThickness = 4;
   // 是否画
   window.painting = false;
+  //图片数据
+  window.historyImageData = [] 
+  //记录最开始画布状态
+  historyImageData.push(ctx.getImageData(0, 0, 700, 500))
+  //记录回退的步数
+  window.backCount = 0
   updateCanvasOption();
 };
 
@@ -46,6 +52,10 @@ const bindEventDown = () => {
 const bindEventUp = () => {
   bindEvent(canvas, "mouseup", (event) => {
     painting = false;
+    historyImageData.push(ctx.getImageData(0, 0, 700, 500))
+    // backCount++    添加时这样会出bug，当回退一步后再写两画以上再回退时会直接退两步。
+    backCount = historyImageData.length - 1    //解决办法
+    console.log(backCount);
   });
 };
 
@@ -119,6 +129,30 @@ const bindEventRightSide = () => {
   });
 };
 
+const bindEventBack = () => {
+  let goBack = e('.goBack')
+  bindEvent(goBack,'click',() => {
+    if(backCount>0) {
+      // historyImageData.pop()
+      backCount--
+    }
+    console.log('backCount',backCount);
+    ctx.putImageData(historyImageData[backCount], 0, 0)
+  })
+}
+
+const bindEventForward = () => {
+  let goForward = e('.goForward')
+  bindEvent(goForward,'click',() => {
+    //如果步数==当前图片数据个数就直接结束函数
+    if(backCount==historyImageData.length-1) {
+      return
+    }
+    backCount++
+    ctx.putImageData(historyImageData[backCount], 0, 0)
+  })
+}
+
 const bindEvents = () => {
   bindEventMove();
   bindEventDown();
@@ -127,6 +161,8 @@ const bindEvents = () => {
   bindEventPenColor();
   bindEventPenThickness();
   bindEventRightSide();
+  bindEventBack();
+  bindEventForward();
 };
 
 const __main = () => {
