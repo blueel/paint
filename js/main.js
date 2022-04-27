@@ -53,7 +53,7 @@ const bindEventUp = () => {
   bindEvent(canvas, "mouseup", (event) => {
     painting = false;
     historyImageData.push(ctx.getImageData(0, 0, 700, 500))
-    // backCount++    添加时这样会出bug，当回退一步后再写两画以上再回退时会直接退两步。
+    // backCount++    //添加时这样会出bug，当回退一步后再写两画以上再回退时会直接退两步。
     backCount = historyImageData.length - 1    //解决办法
     console.log(backCount);
   });
@@ -165,7 +165,7 @@ const bindEventForward = () => {
     if(backCount==historyImageData.length-1) {
       return
     }
-    backCount++
+    backCount+=1
     ctx.putImageData(historyImageData[backCount], 0, 0)
   })
 }
